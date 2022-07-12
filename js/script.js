@@ -36,5 +36,15 @@ const root = new Vue({
             },  
       ]  
     },
-    methods: {}
+    computed: {
+        
+    },
+    methods: {
+        goNextImage(){
+            this.currentActiveIndex++;
+        },
+        goPrevImage(){
+            this.currentActiveIndex--;
+        }
+    }
 }) 

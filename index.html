@@ -30,8 +30,8 @@
 <body>
     <div class="container" id="root">
         <div id="carousel"> 
-            <!-- Bottone left -->
-            <i class="bi bi-arrow-left-square-fill" id="prev"></i>
+            <!-- Bottone Prev -->
+            <i @click="goPrevImage" class="bi bi-arrow-left-square-fill" v-if="(currentActiveIndex < 0)? currentActiveIndex = pictures.length - 1 : goPrevImage"></i>
 
             <!-- Immagini -->
             <div id="gallery">
@@ -45,8 +45,8 @@
                 
             </div>
 
-            <!-- Bottone right -->
-            <i class="bi bi-arrow-right-square-fill" id="next"></i>
+            <!-- Bottone Next -->
+            <i @click="goNextImage" class="bi bi-arrow-right-square-fill" v-if="(currentActiveIndex > pictures.length - 1)? currentActiveIndex = 0 : goNextImage"></i>
         </div>
         <div id="thumbnail">
             <img v-for="(pic, index) in pictures" :src="pic.url" :alt="pic.title" :data-index="index" :class="{'active' : currentActiveIndex === index}">
