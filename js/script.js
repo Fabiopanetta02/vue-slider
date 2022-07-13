@@ -2,6 +2,7 @@ const root = new Vue({
     name: 'carousel',
     el: '#root',
     data: {
+        autoplay: undefined,
         currentActiveIndex: 0,
         pictures: [
             {
@@ -37,14 +38,34 @@ const root = new Vue({
       ]  
     },
     computed: {
+        isFirstCard(){
+            return this.currentActiveIndex === 0
+        },
+        isLastCard() {
+            return this.currentActiveIndex === this.pictures.length - 1
+        }
         
     },
     methods: {
-        goNextImage(){
-            this.currentActiveIndex++;
+        goNextImage() {
+            if(this.isLastCard) this.currentActiveIndex = 0;
+            else this.currentActiveIndex++;
         },
-        goPrevImage(){
-            this.currentActiveIndex--;
+        goPrevImage() {
+            if(this.isFirstCard) this.currentActiveIndex = this.pictures.length - 1;
+            else this.currentActiveIndex--;
+        },
+        goToIndex(index) {
+            this.currentActiveIndex = index;
+        },
+        stopAutoplay() {
+            clearInterval(this.autoplay);
+        },
+        startAutoplay() {
+            this.autoplay = setInterval(this.goNextImage, 2000);
         }
+    },
+    created() {
+        this.startAutoplay();
     }
 }) 
